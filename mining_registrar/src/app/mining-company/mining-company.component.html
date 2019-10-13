@@ -1,0 +1,157 @@
+<div class="header">
+  <div style="float:left;font-size:2.2em;padding-left:0.5em;">MINING COMPANY</div>
+  <div style="float:right;margin-right:5%">
+    <a routerLink="/homepage">
+      <button class="smallbutton">Home</button>
+    </a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <!-- <a routerLink="/homepage">
+      <button class="smallbutton">Logout</button>
+    </a> -->
+  </div>
+</div>
+<br>
+<div style="float:left;">
+  <a routerLink="/new-request-form"><button class="smallbutton" *ngIf="!transferRequest">New Request</button></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <button class="smallbutton" (click)="transferReq()" *ngIf="!transferRequest">Transfer Request</button>
+  <button class="smallbutton" *ngIf="transferRequest" (click)="onBack()">Back</button>
+</div><br><br><br>
+<div *ngIf="!transferRequest">
+  <mat-table [dataSource]="dataSource" (matSortChange)="sortData($event)" matSortActive="cid" matSort class="mat-elevation-z8" matSortDirection="desc" matSortDisableClear>
+    <ng-container matColumnDef="cid">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Claim Id </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.Key}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="submit_date">
+      <mat-header-cell *matHeaderCellDef >Created</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{row.Record.submiy_date | date}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="comp_name">
+      <mat-header-cell *matHeaderCellDef> Name</mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.Record.company_name}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="request_type">
+      <mat-header-cell *matHeaderCellDef >Request Type</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{row.Record.request_type}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="status">
+      <mat-header-cell *matHeaderCellDef > Status </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.Record.status}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="ore">
+      <mat-header-cell *matHeaderCellDef></mat-header-cell>
+      <mat-cell *matCellDef="let element" class="mat-button"><button class="smallbutton" (click)="selectRow(element)">view</button></mat-cell>
+    </ng-container>
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+  <mat-paginator [length]="100" [pageSize]="6" [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons></mat-paginator>
+</div>
+
+<!-- <div *ngIf="!transferRequest">
+  <mat-table [dataSource]="dataSource" (matSortChange)="sortData($event)" matSortActive="cid" matSort class="mat-elevation-z8" matSortDirection="desc" matSortDisableClear>
+    <ng-container matColumnDef="cid">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Claim Id </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.cid}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="submit_date">
+      <mat-header-cell *matHeaderCellDef >Created</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{row.submit_date | date}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="comp_name">
+      <mat-header-cell *matHeaderCellDef> Name</mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.comp_name}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="request_type">
+      <mat-header-cell *matHeaderCellDef >Request Type</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{row.request_type}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="status">
+      <mat-header-cell *matHeaderCellDef > Status </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.status}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="ore">
+      <mat-header-cell *matHeaderCellDef></mat-header-cell>
+      <mat-cell *matCellDef="let element" class="mat-button"><button class="smallbutton" (click)="selectRow(element)">view</button></mat-cell>
+    </ng-container>
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+  <mat-paginator [length]="100" [pageSize]="6" [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons></mat-paginator>
+</div> -->
+
+<div *ngIf="transferRequest">
+  <div style="margin:auto;margin-right:30%;margin-left:30%;">
+    <p style="color: #0077B5;font-size:20px">Transfer Request Form</p>
+    <form [formGroup]="transferRequestForm" (ngSubmit)="onTransfer()">
+     <mat-form-field align="center" class="mat-form-field">
+        <mat-label>Select Claim Id</mat-label>
+        <mat-select placeholder="Select Claim Id" formControlName="cid" [ngClass]="{'is-invalid': submitted && f.comp_name.errors}">
+          <mat-option *ngFor="let cid of cids" [value]="cid.Key" >{{cid.Key}}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="submitted && f.comp_name.errors">
+          Claim Id is required
+        </mat-error>
+      </mat-form-field><br>
+      <mat-form-field>
+      <mat-select placeholder="Select Company" formControlName="comp_name" [ngClass]="{'is-invalid': submitted && f.comp_name.errors}" >
+        <mat-option *ngFor="let company of companies" [value]="company" >
+	{{company}}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="submitted && f.comp_name.errors">
+        Company name is required
+      </mat-error>
+    </mat-form-field><br>
+      <!-- <mat-form-field class="mat-form-field">
+        <input matInput placeholder="Company Name (claim to be transferred to)" formControlName="comp_name" [ngClass]="{'is-invalid': submitted && f.comp_name.errors}">
+        <mat-error *ngIf="submitted && f.comp_name  .errors">
+          Company name is required
+        </mat-error>
+      </mat-form-field><br> -->
+      <mat-form-field class="mat-form-field">
+        <input matInput placeholder="Enter Value in $/cubicmeter" type="number" formControlName="value" [ngClass]="{'is-invalid': submitted && f.value.errors}">
+        <mat-error *ngIf="submitted && f.value.errors">
+          Value is required
+        </mat-error>
+      </mat-form-field><br>
+      <!--<div class="requestForm">
+        <label>Claim ID <span>*</span><br>
+          <input type="number" placeholder="" formControlName="cid" [ngClass]="{'is-invalid': submitted && f.comp_name.errors}" />
+          <div *ngIf="submitted && f.comp_name.errors">
+            <div *ngIf="f.comp_name.errors.required" class="error">Claim Id is required</div>
+          </div>
+        </label>
+      </div> -->
+      <!--<div class="requestForm">
+        <label>Company Name (claim to be transferred to) <span>*</span><br>
+          <input type="text" placeholder="" formControlName="comp_name" [ngClass]="{'is-invalid': submitted && f.comp_name.errors}" />
+          <div *ngIf="submitted && f.comp_name.errors">
+            <div *ngIf="f.comp_name.errors.required" class="error">Company name is required</div>
+          </div>
+        </label>
+      </div> -->
+      <!-- <div class="requestForm">
+        <label>Value in $/cubicmeter <span>*</span><br>
+          <input type="number" placeholder="" formControlName="value" [ngClass]="{'is-invalid': submitted && f.value.errors}" />
+          <div *ngIf="submitted && f.value.errors">
+            <div *ngIf="f.value.errors.required" class="error">Value is required</div>
+          </div>
+        </label>
+      </div> -->
+      <button class="smallbutton">Submit</button>
+    </form>
+  </div>
+</div>
+<!-- <div style="overflow:auto">
+  <div style="float:right ;font-size:2em; padding-right:0.5em">
+    <a>
+      <button>New Request</button>&nbsp;&nbsp;&nbsp;
+    </a>
+  </div>
+  <div style="float:right;">
+    <a>
+      <button>Transfer Request</button>&nbsp;&nbsp;
+    </a>
+  </div>
+</div> -->

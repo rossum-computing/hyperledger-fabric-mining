@@ -1,0 +1,87 @@
+<div class="header">
+  <div style="float:left;font-size:2.2em;padding-left:0.5em;">MINISTRY OF LAND AND AGRICULTURE</div>
+  <div style="float:right;margin-right:5%">
+    <a routerLink="/homepage">
+      <button class="smallbutton">Home</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    </a>
+    <!-- <a>
+      <button class="smallbutton">Logout</button>
+    </a> -->
+  </div>
+</div>
+<br>
+<!-- <div style="padding-left:70%;margin-bottom:2em">
+  <button class="smallbutton" *ngIf="!selectHistory" (click)="onHistory()">History</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+  <button class="smallbutton" *ngIf="selectHistory" (click)="onBack()">Back</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</div> -->
+<div>
+  <mat-tab-group (selectedTabChange)="tabClick($event)">
+    <mat-tab label="PENDING CLAIMS">
+      <mat-table [dataSource]="dataSource" matSort  matSortActive="cid" class="mat-elevation-z8" matSortDirection="desc" matSortDisableClear>
+        <ng-container matColumnDef="cid">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>Claim Id</mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.Key}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="comp_name">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Name </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.Record.company_name}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="status">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Status </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.Record.status}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="submit_date">
+          <mat-header-cell *matHeaderCellDef mat-sort-header disableClear>Created</mat-header-cell>
+          <mat-cell *matCellDef="let element">{{element.Record.submiy_date | date}}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="for_button">
+          <mat-header-cell *matHeaderCellDef></mat-header-cell>
+          <mat-cell *matCellDef="let element" class="mat-button"><button (click)="selectRow(element)" class="smallbutton">View</button></mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="approve">
+          <mat-header-cell *matHeaderCellDef></mat-header-cell>
+          <mat-cell *matCellDef="let element" class="mat-button"><button (click)="onApprove(element,'approve')" class="smallbutton">Approve</button></mat-cell>
+        </ng-container>
+        <ng-container *ngIf="selectedAction" matColumnDef="reject">
+          <mat-header-cell *matHeaderCellDef></mat-header-cell>
+          <mat-cell *matCellDef="let element" class="mat-button"><button *ngIf="selectedAction" (click)="onReject(element,'reject')" class="smallbutton">Reject</button></mat-cell>
+        </ng-container>
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+      </mat-table>
+      <mat-paginator [length]="100" [pageSize]="7" [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons></mat-paginator>
+    </mat-tab>
+    <mat-tab label="HISTORY">
+      <mat-table [dataSource]="dataSource" matSort  matSortActive="cid" matSortDirection="desc" class="mat-elevation-z8" matSortDisableClear>
+        <ng-container matColumnDef="cid">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>Claim Id</mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.Key}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="comp_name">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Name </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.Record.company_name}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="request_type">
+          <mat-header-cell *matHeaderCellDef mat-sort-header disableClear>Request Type</mat-header-cell>
+          <mat-cell *matCellDef="let element">{{element.Record.request_type}}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="status">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Status </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.Record.status}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="submit_date">
+          <mat-header-cell *matHeaderCellDef mat-sort-header disableClear>Created</mat-header-cell>
+          <mat-cell *matCellDef="let element">{{element.Record.submiy_date | date}}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="for_button">
+          <mat-header-cell *matHeaderCellDef></mat-header-cell>
+          <mat-cell *matCellDef="let element" class="mat-button"><button (click)="selectRow(element)" class="smallbutton">View</button></mat-cell>
+        </ng-container>
+        <mat-header-row *matHeaderRowDef="displayedColumnslimited"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumnslimited;"></mat-row>
+      </mat-table>
+      <mat-paginator [length]="100" [pageSize]="7" [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons></mat-paginator>
+    </mat-tab>
+  </mat-tab-group>
+</div>

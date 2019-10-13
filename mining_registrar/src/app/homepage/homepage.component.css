@@ -1,0 +1,38 @@
+.button {
+  background-color: #0077B5;
+  color: white;
+  text-align: center;
+  font-size: 1em;
+  width: 12em;
+  height: 3em;
+  border: none;
+  border-radius: 2em;
+  text-decoration: none;
+}
+.smallbutton {
+  background-color: #0077B5;
+  color: white;
+  text-align: center;
+  font-size: 0.8em;
+  min-width: 8em;
+  width:auto;
+  min-height: 2em;
+  height: auto;
+  border: none;
+  border-radius: 0.5em;
+  margin-right:3em;
+}
+a {
+  text-decoration:none;
+}
+.header {
+  color: #0077B5;
+  border-bottom: 0.5px solid lightgrey ;
+  overflow:auto;
+  padding:0em 0 0.1em 0;
+  margin-bottom: 1em;
+  font-weight: bold;
+}
+* {
+  font-family: arial;
+}

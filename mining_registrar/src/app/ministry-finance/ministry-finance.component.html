@@ -1,0 +1,214 @@
+<div class="header">
+  <div style="float:left;font-size:2.2em;padding-left:0.5em;">MINISTRY OF FINANCE</div>
+  <div style="float:right;margin-right:5%">
+    <a routerLink="/homepage">
+      <button class="smallbutton">Home</button>
+    </a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <!-- <a>
+      <button class="smallbutton">Logout</button>
+    </a> -->
+  </div>
+</div>
+<br>
+<!-- <div style="padding-left:70%;margin-bottom:2em">
+  <a routerLink=""><button class="smallbutton">History</button></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</div> -->
+<div>
+  <mat-tab-group (selectedTabChange)="tabClick($event)">
+    <mat-tab label="REVENUE">
+      <!-- <div align="right">
+        <mat-form-field >  
+          <mat-select placeholder="All Time" [(ngModel)]="i">
+              <mat-option  *ngFor="let year of years" [value]="year" >{{year}} </mat-option>
+          </mat-select>
+        </mat-form-field>
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        <mat-form-field>   
+          <mat-select placeholder="All Ores" [(ngModel)]="j">
+            <mat-option  *ngFor="let ore of ores" [value]="ore" >{{ore}} </mat-option>
+          </mat-select>
+        </mat-form-field>&nbsp;&nbsp;
+        <button class="smallbutton" (click)=onFilterData(i,j)>apply</button>
+      </div> -->
+      <div class="mat-tables">
+      <mat-table [dataSource]="dataSourceRevenue" (matSortChange)="sortData($event)" matSortActive="cid" matSort  matSortDirection="desc" class="mat-elevation-z8">
+          <ng-container matColumnDef="start_time">
+            <mat-header-cell *matHeaderCellDef mat-sort-header disableClear>Start Date</mat-header-cell>
+            <mat-cell *matCellDef="let row">{{row.Record.start_time | date}}</mat-cell>
+            <mat-footer-cell *matFooterCellDef></mat-footer-cell>
+          </ng-container>
+          <ng-container matColumnDef="end_time">
+            <mat-header-cell *matHeaderCellDef mat-sort-header disableClear>End Date</mat-header-cell>
+            <mat-cell *matCellDef="let row">{{row.Record.end_time | date}}</mat-cell>
+            <mat-footer-cell *matFooterCellDef></mat-footer-cell>
+          </ng-container>
+          <ng-container matColumnDef="cid">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Claim Id </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.Key}} </mat-cell>
+            <mat-footer-cell *matFooterCellDef class="mat-footer-row">Total</mat-footer-cell>
+          </ng-container>
+          <ng-container matColumnDef="ore">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Ore </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.Record.ore}} </mat-cell>
+            <mat-footer-cell *matFooterCellDef></mat-footer-cell>
+          </ng-container>
+          <ng-container matColumnDef="comp_name">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Name</mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.Record.company_name}} </mat-cell>
+            <mat-footer-cell *matFooterCellDef></mat-footer-cell>
+          </ng-container>
+          <ng-container matColumnDef="value">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Value in $ </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.Record.value}} </mat-cell>
+            <mat-footer-cell *matFooterCellDef></mat-footer-cell>
+          </ng-container>
+          <ng-container matColumnDef="days">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Days </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.Record.days}} </mat-cell>
+            <mat-footer-cell *matFooterCellDef></mat-footer-cell>
+          </ng-container>
+          <!-- <ng-container matColumnDef="value_now">
+            <mat-header-cell *matHeaderCellDef class="mat-column" mat-sort-header>Present Value</mat-header-cell>
+            <mat-cell *matCellDef="let element" class="mat-column">{{element.Record.value_now | currency}} </mat-cell>
+            <mat-footer-cell *matFooterCellDef class="mat-footer-row">{{total_now}}</mat-footer-cell>
+          </ng-container> -->
+          <ng-container matColumnDef="value_year">
+            <mat-header-cell *matHeaderCellDef class="mat-column" mat-sort-header>Current year value</mat-header-cell>
+            <mat-cell *matCellDef="let element" class="mat-column">{{element.Record.value_year | currency}} </mat-cell>
+            <mat-footer-cell *matFooterCellDef class="mat-footer-row">{{total_year}}</mat-footer-cell>
+          </ng-container>
+          <ng-container matColumnDef="value_total">
+            <mat-header-cell *matHeaderCellDef class="mat-column" mat-sort-header> Total Value</mat-header-cell>
+            <mat-cell *matCellDef="let element" class="mat-column">{{element.Record.value_total | currency}} </mat-cell>
+            <mat-footer-cell *matFooterCellDef class="mat-footer-row">{{total_value}}</mat-footer-cell>
+          </ng-container>
+          <ng-container matColumnDef="volume">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Volume </mat-header-cell>
+            <mat-cell *matCellDef="let element">{{element.Record.volume}}</mat-cell>
+            <mat-footer-cell *matFooterCellDef></mat-footer-cell>
+          </ng-container>
+          <mat-header-row *matHeaderRowDef="displayedColumnsRevenue"></mat-header-row>
+          <br><br><br>
+          <mat-row *matRowDef="let row; columns: displayedColumnsRevenue;"></mat-row>
+          <!--<mat-footer-row *matFooterRowDef="displayedColumnsRevenue" class="mat-footer-row"></mat-footer-row> -->
+      </mat-table>
+    </div>
+      <mat-table [dataSource]="dataSourceRevenue" class="mat-elevation-z8">
+        <ng-container matColumnDef="start_time">
+          <mat-footer-cell *matFooterCellDef></mat-footer-cell>
+        </ng-container>
+        <ng-container matColumnDef="end_time">
+          <mat-header-cell *matHeaderCellDef mat-sort-header disableClear>End Date</mat-header-cell>
+          <mat-cell *matCellDef="let row"> </mat-cell>
+          <mat-footer-cell *matFooterCellDef></mat-footer-cell>
+        </ng-container>
+        <ng-container matColumnDef="cid">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>Claim Id </mat-header-cell>
+          <mat-cell *matCellDef="let element"> </mat-cell>
+          <mat-footer-cell *matFooterCellDef class="mat-footer-row">Total</mat-footer-cell>
+        </ng-container>
+        <ng-container matColumnDef="ore">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>Ore </mat-header-cell>
+          <mat-cell *matCellDef="let element"> </mat-cell>
+          <mat-footer-cell *matFooterCellDef></mat-footer-cell>
+        </ng-container>
+        <ng-container matColumnDef="comp_name">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Name</mat-header-cell>
+          <mat-cell *matCellDef="let element"> </mat-cell>
+          <mat-footer-cell *matFooterCellDef></mat-footer-cell>
+        </ng-container>
+        <ng-container matColumnDef="value">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Value </mat-header-cell>
+          <mat-cell *matCellDef="let element"></mat-cell>
+          <mat-footer-cell *matFooterCellDef></mat-footer-cell>
+        </ng-container>
+        <ng-container matColumnDef="days">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Days </mat-header-cell>
+          <mat-cell *matCellDef="let element"></mat-cell>
+          <mat-footer-cell *matFooterCellDef></mat-footer-cell>
+        </ng-container>
+        <!-- <ng-container matColumnDef="value_now">
+          <mat-header-cell *matHeaderCellDef class="mat-column" mat-sort-header>Present Value </mat-header-cell>
+          <mat-cell *matCellDef="let element" class="mat-column"> </mat-cell>
+          <mat-footer-cell *matFooterCellDef class="mat-footer-row">{{total_now | currency}}</mat-footer-cell>
+        </ng-container> -->
+        <ng-container matColumnDef="value_year">
+          <mat-header-cell *matHeaderCellDef class="mat-column" mat-sort-header>Current year value</mat-header-cell>
+          <mat-cell *matCellDef="let element" class="mat-column"></mat-cell>
+          <mat-footer-cell *matFooterCellDef class="mat-footer-row">{{total_year | currency}}</mat-footer-cell>
+        </ng-container>
+        <ng-container matColumnDef="value_total">
+          <mat-header-cell *matHeaderCellDef class="mat-column" mat-sort-header> Total Value </mat-header-cell>
+          <mat-cell *matCellDef="let element" class="mat-column"></mat-cell>
+          <mat-footer-cell *matFooterCellDef class="mat-footer-row">{{total_value | currency}}</mat-footer-cell>
+        </ng-container>
+        <ng-container matColumnDef="volume">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Volume </mat-header-cell>
+          <mat-cell *matCellDef="let element"></mat-cell>
+          <mat-footer-cell *matFooterCellDef></mat-footer-cell>
+        </ng-container>
+        <mat-footer-row *matFooterRowDef="displayedColumnsRevenue"></mat-footer-row>
+      </mat-table>
+
+      <!--<mat-grid-list cols="3" rowHeight="2:1">
+        <mat-grid-tile>TOTAL</mat-grid-tile>
+        <mat-grid-tile>{{total_now}}</mat-grid-tile>
+        <mat-grid-tile>{{total_year}}</mat-grid-tile>
+        <mat-grid-tile>{{total_value}}</mat-grid-tile>
+      </mat-grid-list>
+
+    <div style="width:100%;clear:both;font-weight:bold">
+      <div style="width:8%;float:right">{{total_value}}</div>
+      <div style="width:8%;float:right">{{total_year}}</div>
+      <div style="width:8%;float:right">{{total_now}}</div>
+      <div style="width:10%;float:right">TOTAL</div>
+    </div>
+    <mat-paginator [length]="100" [pageSize]="7" [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons></mat-paginator> -->
+    </mat-tab>
+    <mat-tab label="CLAIMS">
+      <mat-table [dataSource]="dataSource" (matSortChange)="sortData($event)" matSortActive="cid" matSort  matSortDirection="desc" class="mat-elevation-z8">
+        <ng-container matColumnDef="submit_date">
+          <mat-header-cell *matHeaderCellDef mat-sort-header disableClear>Created</mat-header-cell>
+          <mat-cell *matCellDef="let row">{{row.Record.submiy_date | date}}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="cid">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>Claim Id </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.Key}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="comp_name">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Name</mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.Record.company_name}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="status">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Status </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.Record.status}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="for_button">
+          <mat-header-cell *matHeaderCellDef></mat-header-cell>
+          <mat-cell (click)="selectRow(element)" *matCellDef="let element" style="display:flex;justify-content:center">
+            <button class="smallbutton">View</button>
+          </mat-cell>
+        </ng-container>
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+      </mat-table>
+      <mat-paginator [length]="100" [pageSize]="7" [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons></mat-paginator>
+      <!--<mat-table [dataSource]="dataSourceRevenue" class="mat-elevation-z8">
+        <ng-container matColumnDef="cid">
+          <mat-header-cell *matHeaderCellDef>Claim Id </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.cid}} </mat-cell>
+          <mat-footer-cell *matFooterCellDef>Total</mat-footer-cell>
+        </ng-container>
+        <ng-container matColumnDef="value_total">
+          <mat-header-cell *matHeaderCellDef> Total Value </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.value_total}} </mat-cell>
+          <mat-footer-cell *mdFooterCellDef>{{getTotalRevenue()}}</mat-footer-cell>
+        </ng-container>
+        <mat-header-row *matHeaderRowDef="displayedColumnsFooter"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumnsFooter;"></mat-row>
+        <mat-footer-row *matFooterRowDef="displayedColumnsFooter"></mat-footer-row>
+      </mat-table> -->
+    </mat-tab>
+
+  </mat-tab-group>
+</div>

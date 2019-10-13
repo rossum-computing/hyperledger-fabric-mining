@@ -1,0 +1,47 @@
+.header {
+  color: #0077B5;
+  border-bottom: 0.5px solid lightgrey ;
+  overflow:auto;
+  padding:1em 0 2em 0;
+  margin-bottom: 1em;
+  font-weight: bold;
+}
+.smallbutton {
+  background-color: #0077B5;
+  color: white;
+  text-align: center;
+  font-size: 0.8em;
+  min-width: 9em;
+  width:auto;
+  height: 2em;
+  border: none;
+  border-radius: 0.5em;
+}
+a {
+  text-decoration:none;
+}
+* {
+  font-family: arial;
+}
+.mat-column{
+  display:flex;
+  justify-content:center;
+}
+.scrollbar{
+  height:25em;
+  overflow-y: auto;
+}
+mat-sort-header-sorted {
+  color: black;
+}
+/*mat-row, mat-header-row {
+  background: white;
+  min-width: 100vw;
+}
+mat-header-row { //THIS MAKES THE HEADER STICKY
+  position: sticky;
+  position: -webkit-sticky;
+  top: 0;
+  z-index: 1;
+  background-color: inherit;
+}*/

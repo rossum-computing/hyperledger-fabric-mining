@@ -1,0 +1,48 @@
+/* input {
+  min-width: 25em;
+  width: auto;
+  height: 2em;
+  border: 1px solid #0077B5;
+  font-size: 15px;
+  padding-left: 10px;
+  border-radius: 8px;
+} */
+.requestForm {
+  height: 5em;
+  width: auto;
+  color: #0077B5;
+}
+span {
+  color: red;
+}
+button {
+  width: 2em;
+  border-radius: 1em;
+  background-color: #0077B5;
+  color: white;
+}
+.smallbutton {
+  background-color: #0077B5;
+  color: white;
+  text-align: center;
+  font-size: 0.8em;
+  min-width: 8em;
+  width:auto;
+  height: 2em;
+  border: none;
+  border-radius: 0.5em;
+}
+.error {
+   margin-top: 5px;
+   color:red;
+   font-size: 12px;
+}
+a {
+  text-decoration: none;
+}
+* {
+  font-family: arial;
+}
+.mat-form-field{
+  width: 400px;
+}

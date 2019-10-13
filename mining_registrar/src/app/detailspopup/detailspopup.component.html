@@ -1,0 +1,86 @@
+
+<div *ngIf="data.cord">
+  <div>
+  <mat-dialog-content style="color:gray;">
+    <span class="spanLight">Claim Id:</span><span class="spanColor"> {{data.cid}}</span><br><br>
+    <span class="spanLight">Company: </span><span class="spanColor"> {{data.comp_name}}</span><br><br>
+    <span class="spanLight">Date: </span><span class="spanColor"> {{data.submit_date}}</span><br><br>
+    <span class="spanLight">Status: </span><span class="spanColor"> {{data.status}}</span><br><br>
+    <span class="spanLight">CoOrdinates:</span> <span class="spanColor"> {{data.cord}}</span><br><br>
+    <span class="spanLight">Ore: </span><span class="spanColor"> {{data.ore}}</span><br><br>
+    <span class="spanLight">Value in $/cubicMeter:</span><span class="spanColor"> {{data.value}}</span><br><br>
+    <span class="spanLight">Volume: </span><span class="spanColor"> {{data.volume}}</span><br><br>
+    <span class="spanLight">Start Date:</span> <span class="spanColor"> {{data.start_time | date}}</span><br><br>
+    <span class="spanLight">End Date: </span><span class="spanColor"> {{data.end_time | date}}</span><br><br>
+    <div *ngIf="data.reason">
+      <span class="spanLight">Feedback: </span><span class="spanColor">{{data.reason}}</span><br><br>
+    </div>
+  </mat-dialog-content>
+  </div>
+  <div mat-dialog-actions>
+    <button class="smallbutton" (click)="onNoClick()">Close</button>
+  </div>
+</div>
+<div *ngIf="data.msg">
+  <strong><span class="spanLight"> {{data.msg}}</span></strong>
+  <p *ngIf="data.result.cid"><span class="spanLight">Claim Id:</span><span class="spanColor"> {{data.result.cid}}</span></p>
+  <p *ngIf="data.result.tid"><span class="spanLight">Transfer Id:</span><span class="spanColor"> {{data.result.tid}}</span></p>
+  <p><span class="spanLight">Date:</span><span class="spanColor"> {{data.result.submit_date}}</span> </p>
+  <!-- <p style="color:#0077B5;font-size:1em">{{data.msg}}</p>
+  <p style="color:#0077B5;font-size:1em" *ngIf="data.result.cid">Claim Id:  {{data.result.cid}}</p>
+  <p style="color:#0077B5;font-size:1em" *ngIf="data.result.tid">Transfer Id:  {{data.result.tid}}</p>
+  <p style="color:#0077B5;font-size:1em">Date: {{data.result.submit_date}}</p>-->
+  <div align="center" mat-dialog-actions>
+    <button class="smallbutton" (click)="onNoClick()">OK</button>
+  </div>
+</div>
+
+<div *ngIf="data.message">
+  <strong><span class="spanLight"> {{data.message}}</span></strong>
+  <!-- <p style="color:#0077B5;font-size:1em">{{data.msg}}</p>
+  <p style="color:#0077B5;font-size:1em" *ngIf="data.result.cid">Claim Id:  {{data.result.cid}}</p>
+  <p style="color:#0077B5;font-size:1em" *ngIf="data.result.tid">Transfer Id:  {{data.result.tid}}</p>
+  <p style="color:#0077B5;font-size:1em">Date: {{data.result.submit_date}}</p>-->
+  <div align="center" mat-dialog-actions>
+    <button class="smallbutton" (click)="onNoClick()">OK</button>
+  </div>
+</div>
+
+
+<div *ngIf="data.feedback" mat-dialog-content>
+  <p>Please enter reason to reject claim</p>
+  <mat-form-field style="width:400px;">
+    <textarea style="height:50px;" matInput [(ngModel)]="data.feedback_msg"></textarea>
+  </mat-form-field>
+  <div mat-dialog-actions>
+    <button class="smallbutton" [mat-dialog-close]="data.feedback_msg" cdkFocusInitial>Submit</button>
+  </div>
+</div>
+<div *ngIf="data.action == 'approve'" align="center">
+  <p>Do you really want to approve?</p>
+  <div mat-dialog-actions align="center">
+    <button class="smallbutton" [mat-dialog-close]="false" cdkFocusInitial>NO</button>&nbsp;&nbsp;&nbsp;&nbsp;
+    <button class="smallbutton" [mat-dialog-close]="true" cdkFocusInitial>YES</button>
+  </div>
+</div>
+<div *ngIf="data.action == 'reject'" align="center">
+  <p>Do you really want to Reject?</p>
+  <div mat-dialog-actions align="center">
+    <button class="actionButton" [mat-dialog-close]="false" cdkFocusInitial>NO</button>&nbsp;&nbsp;&nbsp;&nbsp;
+    <button class="actionButton" [mat-dialog-close]="true" cdkFocusInitial>YES</button>
+  </div>
+</div>
+<div *ngIf="data.action == 'submit'" align="center">
+  <p>Do you really want to Submit?</p>
+  <div mat-dialog-actions align="center">
+    <button class="actionButton" [mat-dialog-close]="false" cdkFocusInitial>NO</button>&nbsp;&nbsp;&nbsp;&nbsp;
+    <button class="actionButton" [mat-dialog-close]="true" cdkFocusInitial>YES</button>
+  </div>
+</div>
+<div *ngIf="data.action == 'transfer'" align="center">
+  <p>Do you really want to Transfer?</p>
+  <div mat-dialog-actions align="center">
+    <button class="actionButton" [mat-dialog-close]="false" cdkFocusInitial>NO</button>&nbsp;&nbsp;&nbsp;&nbsp;
+    <button class="actionButton" [mat-dialog-close]="true" cdkFocusInitial>YES</button>
+  </div>
+</div>

@@ -1,0 +1,124 @@
+<div style="margin-bottom:3em">
+  <a routerLink="/mining-company" style="float:right">
+    <button class="smallbutton" style="margin-right:8em">Back</button>
+  </a>
+  <h2 style="color:#0077B5; text-align:center;">Claim Request Form</h2>
+</div>
+<div style="margin:auto;margin-right:30%;margin-left:30%;">
+  <form [formGroup]="newRequestForm" (ngSubmit)="onSubmit()">
+    <mat-form-field class="mat-form-field">
+      <input matInput placeholder="Land CoOrdinates" formControlName="cord" [ngClass]="{'is-invalid': submitted && f.cord.errors}">
+      <mat-error *ngIf="submitted && f.cord.errors">
+        Land Cordinates is required
+      </mat-error>
+    </mat-form-field><br>
+    <p style="font-size:10px;color:gray;">ex: [ [11.659852, -4.462934 ], [11.619251, -4.397508 ], [11.721815, -4.336669] ]</p>
+    <mat-form-field>
+      <mat-select placeholder="Select ore" formControlName="ore" [ngClass]="{'is-invalid': submitted && f.ore.errors}">
+        <mat-option *ngFor="let ore of ores" [value]="ore" >{{ore}}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="submitted && f.ore.errors">
+        Ore is required
+      </mat-error>
+    </mat-form-field><br>
+    <mat-form-field>
+      <input matInput placeholder="Select start date" [matDatepicker]="picker" [min]="today" (ngModelChange)="onInputValue($event)" formControlName="start_time" [ngClass]="{'is-invalid': submitted && f.start_time.errors}">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+      <mat-error *ngIf="submitted && f.start_time.errors">
+        Start date is required
+      </mat-error>
+    </mat-form-field><br>
+    <mat-form-field>
+      <input matInput placeholder="Select end date"  [matDatepicker]="pick" [min]="nextDate" formControlName="end_time" [ngClass]="{'is-invalid': submitted && f.end_time.errors && dateFlag}">
+      <mat-datepicker-toggle matSuffix [for]="pick"></mat-datepicker-toggle>
+      <mat-datepicker #pick></mat-datepicker>
+      <mat-error *ngIf="submitted && f.end_time.errors && submitted && !dateFlag">
+        End date is required
+      </mat-error>
+      <mat-error *ngIf="submitted && dateFlag">
+        End date must be greater than Start date.
+      </mat-error>
+    </mat-form-field><br>
+    <mat-form-field>
+      <mat-select placeholder="Select Company" formControlName="comp_name" [ngClass]="{'is-invalid': submitted && f.comp_name.errors}" >
+        <mat-option *ngFor="let company of companies" [value]="company" >{{company}}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="submitted && f.comp_name.errors">
+        Company is required
+      </mat-error>
+    </mat-form-field><br>
+    <mat-form-field>
+      <input matInput type="number" placeholder="Enter Volume in cubicmeter" formControlName="volume" [ngClass]="{'is-invalid': submitted && f.volume.errors}" >
+      <mat-error *ngIf="submitted && f.volume.errors">
+        Volume is required
+      </mat-error>
+    </mat-form-field><br>
+    <mat-form-field>
+      <input matInput type="number" placeholder="Enter Value in $/cubicmeter" formControlName="value" [ngClass]="{'is-invalid': submitted && f.value.errors}">
+      <mat-error *ngIf="submitted && f.value.errors">
+        Value is required
+      </mat-error>
+    </mat-form-field><br>
+    <!-- <div class="requestForm">
+      <label>Land CoOrdinates <span>*</span><br>
+        <input type="text" formControlName="cord" placeholder="ex: [ [11.659852, -4.462934],[11.619251, -4.397508] ]" [ngClass]="{'is-invalid': submitted && f.cord.errors}" />
+        <p style="font-size:10px;color:black;">ex:[ [11.659852, -4.462934 ], [11.619251, -4.397508 ], [11.721815, -4.336669] ]</p>
+        <div *ngIf="submitted && f.cord.errors">
+          <div *ngIf="f.cord.errors.required" class="error">Land CoOrdinates is required</div>
+        </div>
+      </label>
+    </div><br>
+    <div class="requestForm">
+      <label>Ore <span>*</span><br>
+        <input type="text" formControlName="ore" [ngClass]="{'is-invalid': submitted && f.ore.errors}" />
+        <div *ngIf="submitted && f.ore.errors">
+          <div *ngIf="f.ore.errors.required" class="error">Type of Ore is required</div>
+        </div>
+      </label>
+    </div>
+    <div class="requestForm">
+      <label>Start Date <span>*</span><br>
+        <input type="date" formControlName="start_time" [ngClass]="{'is-invalid': submitted && f.start_time.errors}" />
+        <div *ngIf="submitted && f.start_time.errors">
+          <div *ngIf="f.start_time.errors.required" class="error">Start Date is required</div>
+        </div>
+      </label>
+    </div>
+    <div class="requestForm">
+      <label>End Date <span>*</span><br>
+        <input type="date" formControlName="end_time" [ngClass]="{'is-invalid': submitted && f.end_time.errors}" />
+        <div *ngIf="submitted && f.end_time.errors">
+          <div *ngIf="f.end_time.errors.required" class="error">End Date is required</div>
+        </div>
+      </label>
+    </div>
+    <div class="requestForm">
+      <label>Company Name <span>*</span><br>
+        <input type="text" placeholder="" formControlName="comp_name" [ngClass]="{'is-invalid': submitted && f.comp_name.errors}" />
+        <div *ngIf="submitted && f.comp_name.errors">
+          <div *ngIf="f.comp_name.errors.required" class="error">Company name is required</div>
+        </div>
+      </label>
+    </div>
+    <div class="requestForm">
+      <label>Volume in M<sup>3</sup><span>*</span><br>
+        <input type="number" placeholder="" formControlName="volume" [ngClass]="{'is-invalid': submitted && f.value.errors}" />
+        <div *ngIf="submitted && f.value.errors">
+          <div *ngIf="f.value.errors.required" class="error">Volume is required</div>
+        </div>
+      </label>
+    </div>
+    <div class="requestForm">
+      <label>Value in $/cubicmeter <span>*</span><br>
+        <input type="number" placeholder="" formControlName="value" [ngClass]="{'is-invalid': submitted && f.value.errors}" />
+        <div *ngIf="submitted && f.value.errors">
+          <div *ngIf="f.value.errors.required" class="error">Value is required</div>
+        </div>
+      </label>
+    </div> -->
+    <button class="smallbutton">Submit</button>
+  </form>
+</div>

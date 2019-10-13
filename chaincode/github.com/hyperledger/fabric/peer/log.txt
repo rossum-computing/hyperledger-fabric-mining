@@ -1,0 +1,1 @@
+Error: failed to create deliver client: orderer client failed to connect to orderer.example.com:7050: failed to create new connection: connection error: desc = "transport: error while dialing: dial tcp: lookup orderer.example.com on 127.0.0.11:53: no such host"
