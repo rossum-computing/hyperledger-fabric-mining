@@ -1,1 +1,3 @@
-Error: failed to create deliver client: orderer client failed to connect to orderer.example.com:7050: failed to create new connection: connection error: desc = "transport: error while dialing: dial tcp: lookup orderer.example.com on 127.0.0.11:53: no such host"
+[34m2019-10-13 20:45:01.476 UTC [chaincodeCmd] checkChaincodeCmdParams -> INFO 001[0m Using default escc
+[34m2019-10-13 20:45:01.476 UTC [chaincodeCmd] checkChaincodeCmdParams -> INFO 002[0m Using default vscc
+[34m2019-10-13 20:45:01.724 UTC [chaincodeCmd] install -> INFO 003[0m Installed remotely response:<status:200 payload:"OK" > 

@@ -6,11 +6,8 @@
 /blockchain-network/ledgers-backup
 /blockchain-network/channel-artifacts/*.json
 /blockchain-network/org3-artifacts/crypto-config/*
-
-/mining/fabric-client-kv-org*
-/mining/node_modules
-.vscode/
-
+/blockchain-network/mining/fabric-client-kv-org*
+/blockchain-network/mining/node_modules
 /blockchain-explorer/explorer_1/scripts/bower_components/
 /blockchain-explorer/explorer_1/webcontent
 /blockchain-explorer/node_modules
@@ -34,3 +31,4 @@
 /blockchain-explorer/ssl-certs/*.csr
 /blockchain-explorer/0
 /blockchain-explorer/app/test/.nyc_output/
+.vscode/
