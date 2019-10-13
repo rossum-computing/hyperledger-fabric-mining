@@ -23,19 +23,19 @@ You can also follow this [link](https://hyperledger-fabric.readthedocs.io/en/lat
 Once you are done with prerequisites, you can begin by downloading this github repository and docker images.
 Run the following commands in the Terminal.
 
-`sudo curl -sSL http://bit.ly/2ysbOFE | bash -s`
+`curl -sSL http://bit.ly/2ysbOFE | sudo bash -s -- 1.4.2 1.4.2 0.4.15`
 
-`git clone https://github.com/rossum-computing/hyperledger-mining.git`
+`git clone https://github.com/rossum-computing/hyperledger-fabric-mining.git`
 
 ### Getting Started, A Network with two organisations
 Now that Docker images and the git repository have been downloaded, we can proceed further.
 
-- Go into "hyperledger-mining" folder.
-- Here there is a "byfn.sh" script, we will use this to generate Network artifacts by running this command `./byfn.sh generate` .
+- Go into "hyperledger-fabric-mining/blockchain-network" folder.
+- Here there is a "byfn.sh" script, we will use this to generate Network artifacts by running this command `sudo ./byfn.sh generate` .
 - The above step generates certificates and keys for all the network entities.
-- Then use the following command to start your Blockchain network `./byfn.sh up -a` .
+- Then use the following command to start your Blockchain network `sudo ./byfn.sh up -a` .
 - If everything goes well you will see that your network has been started in the Terminal.
-- Only follow this step if you want to stop your Network `./byfn.sh down` .
+- Only follow this step if you want to stop your Network `sudo ./byfn.sh down` .
 -  Now run `sudo docker ps` command to see which Dockers are running, you will see that 2 organisations, certificate authority and orderer related nodes running.
 
 For  detailed instructions, check out the official documentation of [Hyperledger facbric](https://hyperledger-fabric.readthedocs.io/en/latest/build_network.html).
@@ -43,14 +43,14 @@ For  detailed instructions, check out the official documentation of [Hyperledger
 ### Adding Third Organisation to the Network
 In this step we will use "eyfn.sh" file to add third organisation to our existing network.
 
-- Type in the following command to add third organisation `./eyfn.sh up` .
+- Type in the following command to add third organisation `sudo ./eyfn.sh up` .
 
 If there are no errors when the above command is run, then the third organisation is successfully added to the network.
 
 ### Running Node application and testing RESTAPI
 With the help of this Node application and the REST API calls built inside it, we can use our Blockchain Network. This is just an interface, we can do this in other methods as well.
 
-- Go into "hyperledger-mining/mining" folder.
+- Go into "hyperledger-fabric-mining/blockchain-network/mining" folder.
 - Run this command `npm install` .
 - Make sure all the packages get installed without errors.
 - To run the node app use the following command `port=4000 node app` .
@@ -61,7 +61,7 @@ Make sure there are no errors occur before proceding to next step.
 ### Starting Frontend web application
 To use the application we need a webpage interface, this was built with Angular 7.
 
-- Go into "hyperledger-mining/mining_registrar" folder.
+- Go into "hyperledger-fabric-mining/blockchain-network/mining_registrar" folder.
 - Here run `npm install` command to install necessary packages for the angular app.
 - Once the installation is done, run `ng serve -o` command, once the Angular files are compiled a webpage will be opened on "localhost:4200".
 
