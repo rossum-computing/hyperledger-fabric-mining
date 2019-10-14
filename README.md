@@ -1,4 +1,9 @@
-# Build Your First Blockchain
+
+# Build A Mining Land Claims & Management app using Blockchain
+
+## Flowchart
+![](https://github.com/rossum-computing/hyperledger-fabric-mining/blob/master/assets/mining_flowchart.jpg)
+
 
 ## Follow the instructions given below
 
