@@ -9,23 +9,52 @@ This is a Blockchain app desinged with the use case of Mining companies.
 Make sure you have the following installed before proceeding.
 - Ubuntu 18.04
 - git - 2.10 or greater
+	- `sudo apt install git`
 - CURL - 7  or greater
-- Docker - version 17.06.2-ce or greater
-- Docker Compose - version 1.14.0 or greater
+	 - `sudo apt install curl`
+- Docker - 17.06.2-ce or greater
+	- `sudo snap install docker`
+	- This command will also install docker-compose
+- Docker Compose - 1.14.0 or greater
+- VS Code - 1.3 or greater
+	- `sudo snap install vscode --classic`
 - Go - 1.12.x or greater (export PATH=$PATH:$GOPATH/bin)
+	- Click this [link](https://dl.google.com/go/go1.13.1.linux-amd64.tar.gz) to download Go.
+	- Once downloaded execute the following commands.
+	- `cd ~/Downloads`
+	- Extract the downloaded file using folloing command.
+	- `sudo tar -C /usr/local -xzf go1.13.1.linux-amd64.tar.gz`
+	- Now we need to export Go lang path to "bashrc" file using VS code.
+	- `code ~/.bashrc`
+	- Add the following line to the end of previosly opened file and save it.
+	- `export PATH=$PATH:/usr/local/go/bin`
 - Nodejs - 8.9.4 or greater / 10.15.3 or greater
+	- `sudo apt install node`
 - NPM - 5.6.0 or greater
+	- `npm install npm@5.6.0 -g`
 - Angular - 7 or greater
+	- `sudo npm install -g @angular/cli`
+- jq - 1.4 or greater
+	- `sudo snap install jq`
 
 You can also follow this [link](https://hyperledger-fabric.readthedocs.io/en/latest/prereqs.html) for further instructions.
+Any other installation methods can be followed, as long as the downloaded version satisfy the requirement.
+
+### Optional - add docker to sudo
+To run docker with out sudo run the following commands.
+
+- `sudo groupadd docker`
+- `sudo gpasswd -a $USER docker`
+- `newgrp docker`
+- Logout/restart for the changes to take effect.
 
 ### Downloads
 Once you are done with prerequisites, you can begin by downloading this github repository and docker images.
 Run the following commands in the Terminal.
 
-`curl -sSL http://bit.ly/2ysbOFE | sudo bash -s -- 1.4.2 1.4.2 0.4.15`
+- `curl -sSL http://bit.ly/2ysbOFE | sudo bash -s -- 1.4.2 1.4.2 0.4.15`
 
-`git clone https://github.com/rossum-computing/hyperledger-fabric-mining.git`
+- `git clone https://github.com/rossum-computing/hyperledger-fabric-mining.git`
 
 ### Getting Started, A Network with two organisations
 Now that Docker images and the git repository have been downloaded, we can proceed further.
@@ -51,7 +80,7 @@ If there are no errors when the above command is run, then the third organisatio
 With the help of this Node application and the REST API calls built inside it, we can use our Blockchain Network. This is just an interface, we can do this in other methods as well.
 
 - Go into "hyperledger-fabric-mining/blockchain-network/mining" folder.
-- Run this command `npm install` .
+- Run this command `sudo npm install` .
 - Make sure all the packages get installed without errors.
 - To run the node app use the following command `port=4000 node app` .
 - Open a new terminal window to test RESTAPI, run `./testMinAPIs.sh` .
@@ -62,7 +91,7 @@ Make sure there are no errors occur before proceding to next step.
 To use the application we need a webpage interface, this was built with Angular 7.
 
 - Go into "hyperledger-fabric-mining/blockchain-network/mining_registrar" folder.
-- Here run `npm install` command to install necessary packages for the angular app.
+- Here run `sudo npm install` command to install necessary packages for the angular app.
 - Once the installation is done, run `ng serve -o` command, once the Angular files are compiled a webpage will be opened on "localhost:4200".
 
 With this we will be able to interact with our Blockchain.
