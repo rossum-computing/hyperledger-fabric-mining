@@ -1,5 +1,21 @@
 
-# Build A Mining Land Claims & Management app using Blockchain
+# Mining Lands Management app built with Blockchain
+
+#### Description
+Management of assets means assigning respective assets to particular party through required process and approvals which means various organisations (both government and private mining companies) communicate with eachother regarding land claims, transfers, etc. 
+
+#### Problem Statement
+In area of Land and Agriculture if an organization requires to buy or take lease on land of mining or agriculture require to go through the process and approvals which is not in a stream lined process, there is a very good chance of hacking/modifying the asset data by the officials and skip the process which is a huge loss for the government and inturn general public.
+
+#### Solution
+The idea is to implement blockchain technology for this to ensure maximum security. If the whole information is on blockchain network, it makes the data tamper proof. Then based on required roles and policies, only authorized persons/organisations can invoke transactions. Also every change is recorded by the system and it can be viewed by all organisations who has access to it.
+
+There are 4 different roles for organisations that will be connected to the network, which are described below.
+
+#### Ministry of Mining
+#### Ministry Land and Agriculture
+#### Ministry of Finance
+#### Mining Company
 
 ## Flowchart
 ![](https://github.com/rossum-computing/hyperledger-fabric-mining/blob/master/assets/mining_flowchart.jpg)
