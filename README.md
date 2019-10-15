@@ -39,7 +39,7 @@ Make sure you have the following installed before proceeding.
 - Docker Compose - 1.14.0 or greater
 - VS Code - 1.3 or greater
 	- `sudo snap install vscode --classic`
-- Go - 1.12.x or greater (export PATH=$PATH:$GOPATH/bin)
+- Go - 1.12.x or greater
 	- Click this [link](https://dl.google.com/go/go1.13.1.linux-amd64.tar.gz) to download Go.
 	- Once downloaded execute the following commands.
 	- `cd ~/Downloads`
@@ -49,8 +49,9 @@ Make sure you have the following installed before proceeding.
 	- `code ~/.bashrc`
 	- Add the following line to the end of previosly opened file and save it.
 	- `export PATH=$PATH:/usr/local/go/bin`
+	- `source ~/.bashrc`
 - Nodejs - 8.9.4 or greater / 10.15.3 or greater
-	- `sudo apt install node`
+	- `sudo apt install nodejs`
 - NPM - 5.6.0 or greater
 	- `npm install npm@5.6.0 -g`
 - Angular - 7 or greater
