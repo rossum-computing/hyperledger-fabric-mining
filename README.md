@@ -38,7 +38,7 @@ Make sure you have the following installed before proceeding.
 	- This command will also install docker-compose
 - Docker Compose - 1.14.0 or greater
 - VS Code - 1.3 or greater
-	- `sudo snap install vscode --classic`
+	- `sudo snap install code --classic`
 - Go - 1.12.x or greater
 	- Click this [link](https://dl.google.com/go/go1.13.1.linux-amd64.tar.gz) to download Go.
 	- Once downloaded execute the following commands.
