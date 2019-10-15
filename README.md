@@ -53,6 +53,7 @@ Make sure you have the following installed before proceeding.
 - Nodejs - 8.9.4 or greater / 10.15.3 or greater
 	- `sudo apt install nodejs`
 - NPM - 5.6.0 or greater
+	- `sudo apt install npm`
 	- `npm install npm@5.6.0 -g`
 - Angular - 7 or greater
 	- `sudo npm install -g @angular/cli`
